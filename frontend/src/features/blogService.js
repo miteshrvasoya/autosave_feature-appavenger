@@ -1,18 +1,19 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:7777/blog/autosave";
+const API_URL = "http://localhost:7777/blog/";
 
 const saveBlog = async (blogData) => {
-    console.log("In Goal Service \n", "Goal : ", blogData);
+    const response = await axios.post(API_URL + "autosave", blogData);
+    return response.data;
+}
 
-    // const response = await axios.post(API_URL, blogData);
-
-    // console.log("In Goal Service \n", "Response : ", response);
+const fetchDraftBlog = async (userId) => {
+    const response = await axios.post(API_URL + "blog/draft", {userId});
     return response.data;
 }
 
 const blogService = {
-    saveBlog,
+    saveBlog, fetchDraftBlog
 }
 
 export default blogService;
