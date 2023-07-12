@@ -1,0 +1,17 @@
+{
+  "name": "autosave-feature",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "frontend": "npm start --prefix frontend"
+  },
+  "author": "Mitesh",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.3"
+  }
+}
