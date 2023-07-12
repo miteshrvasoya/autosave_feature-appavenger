@@ -4,8 +4,11 @@ import {ToastContainer, toast} from 'react-toastify';
 import './App.css';
 import Header from "./components/Header";
 import 'react-quill/dist/quill.snow.css';
+import {useDispatch} from "react-redux";
 
 function App() {
+
+    const dispatch = useDispatch();
 
     const toastId = useRef(null);
     const [blogTitle, setBlogTitle] = useState('');
@@ -20,21 +23,19 @@ function App() {
                 setIsSaving(false);
                 setIsSaved(true);
             }, 2000);
-
         }
-
-    }, [isSaving])
+    }, [isSaving]);
 
     useEffect(() => {
         if (isSaved) {
             toast.dismiss(toastId.current);
             toast.success("Blog Saved", {autoClose: 3000})
         }
-    }, [isSaved])
+    }, [isSaved]);
 
     const handleTitleChanges = (event) => {
         setBlogTitle(event.target.value)
-    }
+    };
 
     return (<div className="App">
         <Header/>
@@ -44,6 +45,7 @@ function App() {
             </div>
             <ReactQuill theme="snow" value={blogContent} onChange={setBlogContent}/>
         </div>
+
     </div>);
 }
 
