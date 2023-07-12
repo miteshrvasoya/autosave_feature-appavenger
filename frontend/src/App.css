@@ -1,5 +1,38 @@
 .App {
-    border: 1px solid red;
-    width: fit-content;
-    height: fit-content;
+    /*border: 5px solid red;*/
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.msgbox {
+    /*border: 1px solid blue;*/
+    width: 90%;
+    height: 90%;
+    margin: 90px auto auto auto;
+}
+
+.blog-title {
+    /*border: 1px solid saddlebrown;*/
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+}
+
+.blog-title > .input-box {
+    border: 1px solid #aeaeae;
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    font-size: 22px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.ql-container.ql-snow {
+    border: 1px solid #aeaeae;
+    height: 600px;
+    font-size: 18px;
 }
