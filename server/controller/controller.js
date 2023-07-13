@@ -11,17 +11,35 @@ const autosaveController = async (req, res) => {
         const savedBlog = await blogSchema.create({
             title: blogTitle, content: blogContent, userId: userId, status: status,
         });
-        console.log("Saved Blog : ", savedBlog);
-        setTimeout(() => {
-            res.status(200).json(savedBlog);
-        }, 4000);
+
+        console.log("Blog Id : ", blogId, "Blog new Title : ", req.body);
+
+        const updateInfo = {
+            date: savedBlog[0]?.updatedAt.toLocaleDateString(), time: savedBlog[0]?.updatedAt.toLocaleTimeString()
+        };
+
+        const responseJSON = {
+            blogData: savedBlog, updateInfo
+        }
+
+        console.log("SAVED INFO : ", savedBlog)
+        res.status(200).json(responseJSON);
     } else {
-        const updateBlog = await blogSchema.findByIdAndUpdate(blogId, {title: blogTitle, content: blogContent});
+        const updateBlog = await blogSchema.findByIdAndUpdate(blogId, {
+            title: blogTitle, content: blogContent, updatedAt: Date.now()
+        });
         const findBlog = await blogSchema.find({userId: req.body.userId, status: "draft"});
-        console.log("Found Blog : ", findBlog);
-        setTimeout(() => {
-            res.status(200).json(findBlog);
-        }, 4000);
+
+        console.log("Blog Update Title : ", blogTitle);
+
+        const updateInfo = {
+            date: findBlog[0].updatedAt.toLocaleDateString(), time: findBlog[0].updatedAt.toLocaleTimeString()
+        };
+
+        const responseJSON = {
+            blogData: findBlog[0], updateInfo
+        }
+        res.status(200).json(responseJSON);
     }
 };
 
@@ -29,10 +47,34 @@ const autosaveController = async (req, res) => {
 //Find and return users draft blog (if there any...)
 const fetchDraftBlogController = async (req, res) => {
     const findDraftedBlog = await blogSchema.find({userId: req.body.userId, status: "draft"});
-    console.log("FIND DRAFT : ", findDraftedBlog);
-    res.status(200).json(findDraftedBlog);
+
+    const updateInfo = {
+        date: findDraftedBlog[0]?.updatedAt.toLocaleDateString(),
+        time: findDraftedBlog[0]?.updatedAt.toLocaleTimeString()
+    };
+
+    const responseJSON = {
+        blogData: findDraftedBlog[0], updateInfo
+    }
+    res.status(200).json(responseJSON);
+};
+
+const createNewBlog = async (req, res) => {
+    const createBlog = await blogSchema.create({
+        title: "", content: "", userId: req.body.userId, status: "draft",
+    });
+
+    const updateInfo = {
+        date: createBlog?.updatedAt.toLocaleDateString(),
+        time: createBlog?.updatedAt.toLocaleTimeString()
+    };
+
+    const responseJSON = {
+        blogData: createBlog, updateInfo
+    }
+    res.status(200).json(responseJSON);
 };
 
 module.exports = {
-    autosaveController, fetchDraftBlogController
+    autosaveController, fetchDraftBlogController, createNewBlog
 }

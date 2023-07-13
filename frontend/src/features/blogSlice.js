@@ -5,6 +5,7 @@ import blogService from "./blogService";
 const initialState = {
     blogs: [],
     draftBlog: undefined,
+    updateInfo: "",
     isSaving: false,
     isSaved: false,
     isFetching: false,
@@ -15,6 +16,15 @@ const initialState = {
 export const fetchDraftBlog = createAsyncThunk("blog/fetch/draft", async (userId, thunkAPI) => {
     try {
         return await blogService.fetchDraftBlog(userId);
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+});
+
+export const createNewBlog = createAsyncThunk("blog/create/new", async (userId, thunkAPI) => {
+    try {
+        return await blogService.createNewBlog(userId);
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
         return thunkAPI.rejectWithValue(message)
@@ -44,11 +54,31 @@ const blogSlice = createSlice({
                 state.isFetching = false;
                 state.isFetched = true;
                 state.isError = false;
-                state.draftBlog = action.payload[0];
+                state.draftBlog = action.payload?.blogData;
+                state.updateInfo = action.payload?.updateInfo;
+                console.log("Draft Blog : ", action.payload)
             })
             .addCase(fetchDraftBlog.rejected, (state, action) => {
                 state.isFetching = false;
                 state.isFetched = false;
+                state.isError = true;
+            })
+            .addCase(createNewBlog.pending, (state) => {
+                state.isSaving = true;
+                state.isSaved = false;
+                state.isError = false;
+            })
+            .addCase(createNewBlog.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isSaved = true;
+                state.isError = false;
+                state.updateInfo = action.payload.updateInfo;
+                state.savedBlog = action.payload.blogData;
+                console.log("updateInfo : ", action.payload);
+            })
+            .addCase(createNewBlog.rejected, (state, action) => {
+                state.isSaving = false;
+                state.isSaved = false;
                 state.isError = true;
             })
             .addCase(saveBlog.pending, (state) => {
@@ -60,8 +90,9 @@ const blogSlice = createSlice({
                 state.isSaving = false;
                 state.isSaved = true;
                 state.isError = false;
-                state.draftBlog = action.payload[0];
-                console.log("PAYLOAD : ", action.payload[0]);
+                state.updateInfo = action.payload.updateInfo;
+                state.savedBlog = action.payload.blogData;
+                console.log("updateInfo : ", action.payload);
             })
             .addCase(saveBlog.rejected, (state, action) => {
                 state.isSaving = false;

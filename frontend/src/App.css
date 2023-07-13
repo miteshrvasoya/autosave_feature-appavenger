@@ -1,5 +1,6 @@
 .App {
     /*border: 5px solid red;*/
+    background-color: #2e3438;
     width: 100%;
     height: 100vh;
     box-sizing: border-box;
@@ -27,14 +28,20 @@
     height: 100%;
     padding: 0 15px;
     font-size: 22px;
+    font-weight: bolder;
     box-sizing: border-box;
     outline: none;
 }
 
 .ql-container.ql-snow {
     border: 1px solid #aeaeae;
+    background-color: white;
     height: 600px;
     font-size: 18px;
+}
+
+.ql-toolbar {
+    background-color: white;
 }
 
 .msgbox > .btns {
@@ -49,8 +56,8 @@
 .btns > input#saveBtn {
     border: 1px solid black;
     border-radius: 5px;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     width: 7%;
     height: 40px;
     font-size: 18px;
@@ -65,4 +72,52 @@
 
 .btns > input#saveBtn:active {
     transform: scale(0.95);
+}
+
+.update-info {
+    border: 1px solid #aeaeae;
+    border-top: 0;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+}
+
+.update-info p {
+    margin: auto 3px;
+    padding: 0;
+    font-family: "Doppio One";
+    color: #d3d3d3;
+}
+
+.update-info > .autosave-div {
+    /*border: 1px solid red;*/
+    width: fit-content;
+    height: 100%;
+    margin: auto 0 auto auto;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    box-sizing: border-box;
+}
+
+.autosave-div > .autosave-btn {
+    width: fit-content;
+    height: 100%;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.autosave-div > p.autosave, .autosave-div > p.autosaving {
+    margin: auto 10px auto auto;
+}
+
+.autosave-div > div {
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
 }

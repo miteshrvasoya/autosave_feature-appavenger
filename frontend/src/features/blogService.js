@@ -12,8 +12,13 @@ const fetchDraftBlog = async (userId) => {
     return response.data;
 }
 
+const createNewBlog = async (userId) => {
+    const response = await axios.post(API_URL + "blog/create", {userId});
+    return response.data;
+}
+
 const blogService = {
-    saveBlog, fetchDraftBlog
+    saveBlog, fetchDraftBlog, createNewBlog
 }
 
 export default blogService;
