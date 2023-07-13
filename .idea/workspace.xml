@@ -6,15 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e943e0e2-ec66-49e3-91ad-be02729dd887" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/features/blogService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/blogService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/features/blogSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/blogSlice.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controller/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controller/controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/blogRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/blogRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/db/dbConfig/dbConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/db/dbConfig/dbConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +66,7 @@
       <workItem from="1689071848617" duration="1099000" />
       <workItem from="1689084312776" duration="2695000" />
       <workItem from="1689130195776" duration="29329000" />
-      <workItem from="1689217365239" duration="21919000" />
+      <workItem from="1689217365239" duration="23434000" />
     </task>
     <servers />
   </component>

@@ -8,9 +8,6 @@ function Header() {
                 <p className="title">
                     Blogs
                 </p>
-                <p className="subtitle">
-                    {/*Create and Share your own thought*/}
-                </p>
             </div>
         </>
     );

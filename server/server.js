@@ -13,6 +13,7 @@ app.use(express.urlencoded({extended: false}));
 
 const PORT = process.env.SERVER_PORT || 7878;
 
+//Create connection with the Database
 dbConnection();
 
 app.use("/blog", blogRoute);

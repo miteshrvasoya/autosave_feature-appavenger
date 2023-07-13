@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {createNewBlog, fetchDraftBlog, saveBlog} from "./features/blogSlice";
 import generateUniqueId from "./utils/generateUserId";
 import {ClipLoader} from "react-spinners";
-import ToggleButton from 'react-toggle-button'
+import ToggleButton from 'react-toggle-button';
 
 function App() {
 
@@ -17,8 +17,6 @@ function App() {
     const toastId = useRef(null);
     const [blogTitle, setBlogTitle] = useState("");
     const [blogContent, setBlogContent] = useState("");
-    const [prevBlogTitle, setPrevBlogTitle] = useState("");
-    const [prevBlogContent, setPrevBlogContent] = useState("");
     const [userId, setUserId] = useState(null);
     const [autosave, setAutosave] = useState(true);
 
@@ -26,6 +24,7 @@ function App() {
         blogs, draftBlog, savedBlog, updateInfo, isSaving, isSaved, isFetching, isFetched, isError
     } = useSelector((state) => state.blog);
 
+    //Fetch Draft blog when page load or Create new Draft blog
     useEffect(() => {
         const userID = localStorage.getItem("userID");
         if (userID === null) {
@@ -39,15 +38,14 @@ function App() {
         }
     }, []);
 
+    //set blog title and content initially
     useEffect(() => {
         setBlogTitle(draftBlog?.title);
-        setPrevBlogTitle(draftBlog?.title);
         setBlogContent(draftBlog?.content);
-        setPrevBlogContent(draftBlog?.content);
-        console.log("DRAFT BLOG : ", draftBlog?._id);
     }, [draftBlog]);
 
 
+    //Handle title changes and Dispatch Function to call API
     const handleTitleChanges = (event) => {
         setBlogTitle(event.target.value)
         const blogId = savedBlog?._id;
@@ -59,14 +57,13 @@ function App() {
 
         if (autosave) {
             setTimeout(() => {
-                console.log("Title Changing, Requesting Update : ", blogData);
                 dispatch(saveBlog(blogData));
             }, 500);
         }
     };
 
+    //Handle content changes and Dispatch Function to call API
     const handleContentChanges = (value) => {
-        // console.log("CONTENT : ", value);
         setBlogContent(value);
         const blogId = savedBlog?._id || "";
         const status = "draft";
@@ -76,10 +73,13 @@ function App() {
         }
 
         if (autosave) {
-            dispatch(saveBlog(blogData));
+            setTimeout(() => {
+                dispatch(saveBlog(blogData));
+            }, 500);
         }
     }
 
+    //Save blog manually
     const handleSaveBlogBtn = () => {
         const blogId = savedBlog?._id || "";
         const status = "draft";
@@ -90,6 +90,7 @@ function App() {
         dispatch(saveBlog(blogData))
     }
 
+    //Handle autosave toggle button
     const handleAutosaveToggle = () => {
         setAutosave(!autosave);
     }
@@ -110,12 +111,14 @@ function App() {
             </>) : (<></>)}
 
             <div className="update-info">
-                {
-                    updateInfo?.date !== undefined && updateInfo?.time !== undefined ? (<><p className="title">Last
-                        Saved
-                        On : </p>
-                        <p className="date-time">{" " + updateInfo?.date + "  " + updateInfo?.time}</p></>) : (<></>)
-                }
+                {updateInfo?.date !== undefined && updateInfo?.time !== undefined ? (<>
+                    <p className="title">
+                        Last Saved On :
+                    </p>
+                    <p className="date-time">
+                        {" " + updateInfo?.date + "  " + updateInfo?.time}
+                    </p>
+                </>) : (<></>)}
 
                 <div className="autosave-div">
                     <div className="autosave-btn">
@@ -127,7 +130,8 @@ function App() {
                             onToggle={handleAutosaveToggle}/>
                     </div>
 
-                    {isSaving ? (<><p className="autosaving">Saving...</p>
+                    {isSaving ? (<>
+                        <p className="autosaving">Saving...</p>
                         <div>
                             <ClipLoader
                                 color="#36d7b7"
@@ -135,10 +139,8 @@ function App() {
                         </div>
                     </>) : (<></>)}
                 </div>
-
             </div>
         </div>
-
     </div>);
 }
 

@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import blogService from "./blogService";
 
-
+//Initial variable
 const initialState = {
     blogs: [],
     draftBlog: undefined,
@@ -13,6 +13,7 @@ const initialState = {
     isError: false,
 };
 
+//Function to fetch draft blog
 export const fetchDraftBlog = createAsyncThunk("blog/fetch/draft", async (userId, thunkAPI) => {
     try {
         return await blogService.fetchDraftBlog(userId);
@@ -22,6 +23,7 @@ export const fetchDraftBlog = createAsyncThunk("blog/fetch/draft", async (userId
     }
 });
 
+//Function to create new blog
 export const createNewBlog = createAsyncThunk("blog/create/new", async (userId, thunkAPI) => {
     try {
         return await blogService.createNewBlog(userId);
@@ -31,6 +33,7 @@ export const createNewBlog = createAsyncThunk("blog/create/new", async (userId, 
     }
 });
 
+//Function to save blog
 export const saveBlog = createAsyncThunk("blog/save/auto", async (blogData, thunkAPI) => {
     try {
         return await blogService.saveBlog(blogData);
@@ -56,7 +59,6 @@ const blogSlice = createSlice({
                 state.isError = false;
                 state.draftBlog = action.payload?.blogData;
                 state.updateInfo = action.payload?.updateInfo;
-                console.log("Draft Blog : ", action.payload)
             })
             .addCase(fetchDraftBlog.rejected, (state, action) => {
                 state.isFetching = false;
@@ -74,7 +76,6 @@ const blogSlice = createSlice({
                 state.isError = false;
                 state.updateInfo = action.payload.updateInfo;
                 state.savedBlog = action.payload.blogData;
-                console.log("updateInfo : ", action.payload);
             })
             .addCase(createNewBlog.rejected, (state, action) => {
                 state.isSaving = false;
@@ -92,7 +93,6 @@ const blogSlice = createSlice({
                 state.isError = false;
                 state.updateInfo = action.payload.updateInfo;
                 state.savedBlog = action.payload.blogData;
-                console.log("updateInfo : ", action.payload);
             })
             .addCase(saveBlog.rejected, (state, action) => {
                 state.isSaving = false;
